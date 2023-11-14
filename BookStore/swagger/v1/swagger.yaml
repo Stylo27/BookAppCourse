@@ -1,0 +1,97 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/books":
+    get:
+      summary: Take all books
+      tags:
+      - Books
+      responses:
+        '200':
+          description: Books list
+    post:
+      summary: Create new book
+      tags:
+      - Books
+      parameters: []
+      responses:
+        '201':
+          description: Books list
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: text
+                author:
+                  type: string
+                genre:
+                  type: string
+  "/api/v1/books/{id}":
+    get:
+      summary: Take a specific book
+      tags:
+      - Books
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Book found
+        '404':
+          description: Book not found
+    put:
+      summary: Update book parameter
+      tags:
+      - Books
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Updates attribute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: text
+                author:
+                  type: string
+                genre:
+                  type: string
+    delete:
+      summary: Delete book
+      tags:
+      - Books
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: Updates attribute
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
