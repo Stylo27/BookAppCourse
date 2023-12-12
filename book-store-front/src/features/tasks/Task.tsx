@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { ITask, addTask, selectTasks } from './tasksSlice';
+import { ITask, addTask, fetchTasksAsync, selectTasks } from './tasksSlice';
 
 export default function Tasks(): any {
   const dispatch = useAppDispatch();
@@ -13,6 +13,11 @@ export default function Tasks(): any {
     } as ITask;
     dispatch(addTask(task));
   }
+
+  useEffect(() => {
+    dispatch(fetchTasksAsync());
+  }, []);
+  
   return(
     <>
       <button onClick={handleClick}>Generate Task</button>
